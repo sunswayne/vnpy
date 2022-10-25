@@ -43,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.main_engine: MainEngine = main_engine
         self.event_engine: EventEngine = event_engine
 
-        self.window_title: str = f"VeighNa Trader 社区版 - {vnpy.__version__}   [{TRADER_DIR}]"
+        self.window_title: str = f"土拨鼠量化交易平台V1.0 [{TRADER_DIR}]" # - {vnpy.__version__}   [{TRADER_DIR}]"
 
         self.widgets: Dict[str, QtWidgets.QWidget] = {}
         self.monitors: Dict[str, BaseMonitor] = {}
@@ -98,7 +98,7 @@ class MainWindow(QtWidgets.QMainWindow):
         bar.setNativeMenuBar(False)     # for mac and linux
 
         # System menu
-        sys_menu: QtWidgets.QMenu = bar.addMenu("系统")
+        sys_menu: QtWidgets.QMenu = bar.addMenu("开始")
 
         gateway_names: list = self.main_engine.get_all_gateway_names()
         for name in gateway_names:
@@ -161,13 +161,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.send_test_email
         )
 
-        self.add_action(
-            help_menu,
-            "社区论坛",
-            get_icon_path(__file__, "forum.ico"),
-            self.open_forum,
-            True
-        )
+        # self.add_action(
+        #     help_menu,
+        #     "社区论坛",
+        #     get_icon_path(__file__, "forum.ico"),
+        #     self.open_forum,
+        #     True
+        # )
 
         self.add_action(
             help_menu,

@@ -9,6 +9,7 @@ from enum import Enum
 from typing import Any, Dict, List
 from copy import copy
 from tzlocal import get_localzone_name
+from qt_material import apply_stylesheet
 
 import importlib_metadata
 
@@ -594,6 +595,7 @@ class ConnectDialog(QtWidgets.QDialog):
 
         # Initialize line edits and form layout based on setting.
         form: QtWidgets.QFormLayout = QtWidgets.QFormLayout()
+        self.setMinimumWidth(315)
 
         for field_name, field_value in default_setting.items():
             field_type: type = type(field_value)
@@ -713,9 +715,11 @@ class TradingWidget(QtWidgets.QWidget):
         self.price_check.setToolTip("设置价格随行情更新")
 
         send_button: QtWidgets.QPushButton = QtWidgets.QPushButton("委托")
+        # send_button.setProperty('class', 'warning')
         send_button.clicked.connect(self.send_order)
 
         cancel_button: QtWidgets.QPushButton = QtWidgets.QPushButton("全撤")
+        # cancel_button.setProperty('class', 'danger')
         cancel_button.clicked.connect(self.cancel_all)
 
         grid: QtWidgets.QGridLayout = QtWidgets.QGridLayout()
@@ -728,6 +732,7 @@ class TradingWidget(QtWidgets.QWidget):
         grid.addWidget(QtWidgets.QLabel("价格"), 6, 0)
         grid.addWidget(QtWidgets.QLabel("数量"), 7, 0)
         grid.addWidget(QtWidgets.QLabel("接口"), 8, 0)
+        grid.addWidget(QtWidgets.QLabel(""), 9, 0)
         grid.addWidget(self.exchange_combo, 0, 1, 1, 2)
         grid.addWidget(self.symbol_line, 1, 1, 1, 2)
         grid.addWidget(self.name_line, 2, 1, 1, 2)
@@ -1136,20 +1141,14 @@ class AboutDialog(QtWidgets.QDialog):
 
     def init_ui(self) -> None:
         """"""
-        self.setWindowTitle("关于VeighNa Trader")
+        self.setWindowTitle("关于土拨鼠量化交易平台V1.0")
 
         from ... import __version__ as vnpy_version
 
         text: str = f"""
             By Traders, For Traders.
 
-            Created by VeighNa Technology
-
-
-            License：MIT
-            Website：www.vnpy.com
-            Github：www.github.com/vnpy/vnpy
-
+            Created by 土拨鼠量化团队.
 
             VeighNa - {vnpy_version}
             Python - {platform.python_version()}
@@ -1183,7 +1182,7 @@ class GlobalDialog(QtWidgets.QDialog):
     def init_ui(self) -> None:
         """"""
         self.setWindowTitle("全局配置")
-        self.setMinimumWidth(800)
+        self.setMinimumWidth(650)
 
         settings: dict = copy(SETTINGS)
         settings.update(load_json(SETTING_FILENAME))

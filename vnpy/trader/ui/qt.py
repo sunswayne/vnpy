@@ -11,6 +11,7 @@ from PySide6 import QtGui, QtWidgets, QtCore
 
 from ..setting import SETTINGS
 from ..utility import get_icon_path
+from qt_material import apply_stylesheet
 
 
 Qt = QtCore.Qt
@@ -26,7 +27,9 @@ def create_qapp(app_name: str = "VeighNa Trader") -> QtWidgets.QApplication:
     """
     # Set up dark stylesheet
     qapp: QtWidgets.QApplication = QtWidgets.QApplication(sys.argv)
-    qapp.setStyleSheet(qdarkstyle.load_stylesheet(qt_api="pyside6"))
+    # qapp.setStyleSheet(qdarkstyle.load_stylesheet(qt_api="pyside6"))
+    # setup stylesheet
+    apply_stylesheet(qapp, theme='dark_teal.xml', invert_secondary=False, extra={'density_scale': '0'})
 
     # Set up font
     font: QtGui.QFont = QtGui.QFont(SETTINGS["font.family"], SETTINGS["font.size"])
